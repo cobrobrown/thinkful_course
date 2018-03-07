@@ -1,0 +1,54 @@
+# What was the hottest day in our data set? Where was that?
+SQL Code:
+SELECT
+	Date,
+	ZIP,
+	MAX(MaxTemperatureF)
+FROM
+	weather
+
+Return from DB Browser:
+1 rows returned in 2ms
+Date		ZIP		MaxTemperatureF
+2015-11-17	94063	134
+
+# How many trips started at each station?
+SQL Code:
+SELECT
+	start_station,
+	COUNT(start_station)
+FROM
+	trips
+GROUP BY
+	start_station
+
+Return from DB Browser:
+80 rows returned in 742ms
+80 unique start stations, each with their own count
+ 
+# What's the shortest trip that happened?
+SQL Code:
+SELECT
+	trip_id,
+	MIN(duration)
+FROM
+	trips
+
+Return from DB Browser:
+1 rows returned in 251ms
+trip_id		duration
+1011650		60
+
+# What is the average trip duration, by end station?
+SQL Code:
+SELECT
+	end_station,
+	AVG(duration)
+FROM
+	trips
+GROUP BY
+	end_station
+
+Return from DB Browser:
+80 rows returned in 814ms
+80 unique end stations, each with their own average duration
