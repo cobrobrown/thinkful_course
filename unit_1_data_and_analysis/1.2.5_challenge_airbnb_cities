@@ -1,0 +1,90 @@
+# What's the most expensive listing? What else can you tell me about the listing?
+SQL Code:
+First, run this to get rid of dollar sign in price columns
+UPDATE
+	listings
+SET
+	price = REPLACE(price, '$', '')
+	weekly_price = REPLACE(weekly_price, '$', '')
+	monthly_price = REPLACE(monthly_price, '$', '')
+UPDATE
+	calendar
+SET
+	price = REPLACE(price, '$', '')
+	available = REPLACE(available, 'f', '0')
+	available = REPLACE(available, 't', '1')
+
+Then, run this to get most expensive listings
+SELECT
+	price,
+	weekly_price,
+	monthly_price,
+	host_name
+FROM
+	listings
+ORDER BY price DESC
+LIMIT 5
+
+Return from DB Browser:
+5 rows returned in 81ms
+The most expensive Airbnb for a single night is 9,996.00! Weekly it is 9,999.00 and monthly it is 9,999.00. Most surprisingly, these expensive Airbnbs have a similarly expensive single night, weekly or monthly price.
+
+# What neighborhoods seem to be the most popular?
+SQL Code:
+SELECT
+	neighborhood,
+	COUNT(neighborhood) n_count
+FROM
+	listings
+GROUP BY 1
+ORDER BY n_count DESC
+LIMIT 5
+
+Return from DB Browser:
+5 rows returned in 79ms
+The Mission District with 1063 listings. Surprisingly, the next highest is Western Addition/NOPA with 543 listings.
+If I change the column to neighborhood_cleansed, the values of Mission and Western Addition change to 1038 and 810, respectively.
+
+# What time of year is the cheapest time to go to your city? What about the busiest?
+SQL Code:
+-- Absolute Lowest Price
+SELECT
+	date,
+	price
+FROM
+	calendar
+WHERE price != 0
+ORDER BY price
+
+-- Lowest Average Price
+SELECT
+	date,
+	AVG(price) as avg_price
+FROM
+	calendar
+GROUP BY date
+ORDER BY avg_price
+
+-- Most/Least available Date in calendar table
+SELECT
+	date,
+	SUM(available) as total_available
+FROM
+	calendar
+GROUP BY date
+ORDER BY total_available
+
+Return from DB Browser:
+By cheapest, we may mean absolute lowest price or lowest average price.
+3249960 rows returned in 18474ms
+Absolute Lowest	Price		Date
+10							2017-12-16, 12-17, 12-18, 10-10, 10-11
+366 rows returned in 7134ms
+Lowest Average Price		Date
+16.28						2017-10-02
+The Busiest time of year for traveling is either the one with most available listings (people are more willing to host you) or the one with least available listings (every Airbnb is taken!).
+Most Available Listings		Date
+3651						2017-12-12
+Least Available Listings	Date
+625							2017-10-02
+
