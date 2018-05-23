@@ -59,10 +59,10 @@ print ("Found {} Twitter Handles!".format(df['Twitter Handles'].isnull().sum()))
 # https://stackoverflow.com/questions/38859362/tweepy-multiple-user-search
 # twitter api: followers_count, friends_count, listed_count, created_at, favourites_count, verified, statuses_count
 # Consumer keys and access tokens, used for OAuth
-consumer_key = '3DmGy1X6rwL6NE9LOLS2FCvln'
-consumer_secret = 'jOWtPz5QGrxQxQrmBFbeFB7G7cd6o4SNxjvXpwjL50QIXuKyFX'
-access_token = '2954361026-dZov9l5RskhzMtvtxGbZ75P0tychbqtLNJvaVug'
-access_token_secret = 'o34FhBstoJV2xL4PEzraWsOt2Nbq84KkgJMuOsmUT0yNE'
+consumer_key = 'some_key'
+consumer_secret = 'some_secret'
+access_token = 'some_token'
+access_token_secret = 'some_token_secret'
 # OAuth process, using the keys and tokens
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
