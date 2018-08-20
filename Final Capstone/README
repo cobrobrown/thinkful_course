@@ -1,0 +1,12 @@
+Here is a comporehensive guide to my Final Capstone: Predicting Patient Volume at Stanford Children's Hospital.
+
+# Notebooks
+Exploratory Data Analysis
+- Characteristics of the dataset
+- Modeling different departments
+- Features to use in models
+
+Model Evaluation
+- Modeling pipeline
+- Feature engineering
+- Evaluation criteria and choosing a model
